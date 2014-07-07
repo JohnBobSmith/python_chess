@@ -30,8 +30,8 @@ blackKnight = "BN"
 blackKnight1 = "BN"
 blackBishop = "BB"
 blackBishop1 = "BB"
-blackKing = "WK"
-blackQueen = "WQ"
+blackKing = "BK"
+blackQueen = "BQ"
 blackPawn1 = "BP"
 blackPawn2 = "BP"
 blackPawn3 = "BP"
@@ -85,9 +85,50 @@ def print_board():
     for col in board:
         print (" ".join(col))
         
+def find_piece(piece_to_find):
+    '''
+    this function will find the piece that
+    the user entered. It currently prints
+    out the position that the specific piece 
+    was found at.
+    '''
+    piece_row = 0
+    piece_col = 0
+    
+    for row in range(len(board)):
+        for col in range(len(board[row])):
+            if board[row][col] == piece_to_find:
+                piece_row = row
+                piece_col = col
+                
+                print "The %s was found at position %s:%s" %(piece_to_find, piece_row, piece_col)
+                
+def move_piece(piece_to_move):
+    '''
+    This function will actually find and then move
+    the found piece. Does not move the piece
+    currently. 
+    '''
+    if piece_to_move == "K":
+        find_piece("WK")
+            
+def select_piece():
+    '''
+    Lets the user select a piece. Contains the
+    menu that the user is presented with. 
+    '''
+    piece = ""
+    userInput = ""
+    print "Please select your piece"
+    userInput = raw_input(">> ")
+    if userInput == "K":
+        piece = "WK"
+        move_piece("K")
+        
 def main():
     init_board()
     print_board()
+    select_piece()
                 
 if __name__ == "__main__":
     main()
