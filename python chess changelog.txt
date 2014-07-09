@@ -1,0 +1,5 @@
+python chess changelog:
+
+build 06.08.2014.19:06
+-contains working board implementation
+-contains working piece movement WITHOUT following chess rules

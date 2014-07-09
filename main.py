@@ -85,23 +85,8 @@ def print_board():
     for col in board:
         print (" ".join(col))
         
-def find_piece(piece_to_find):
-    '''
-    this function will find the piece that
-    the user entered. It currently prints
-    out the position that the specific piece 
-    was found at.
-    '''
-    piece_row = 0
-    piece_col = 0
-    
-    for row in range(len(board)):
-        for col in range(len(board[row])):
-            if board[row][col] == piece_to_find:
-                piece_row = row
-                piece_col = col
-                
-                print "The %s was found at position %s:%s" %(piece_to_find, piece_row, piece_col)
+init_board()
+print_board()
                 
 def move_piece(piece_to_move):
     '''
@@ -109,25 +94,60 @@ def move_piece(piece_to_move):
     the found piece. Does not move the piece
     currently. 
     '''
-    if piece_to_move == "K":
-        find_piece("WK")
-            
+    print "Enter the co-ordinate where you would"
+    print "Like to move your piece to"
+    print "Enter row"
+    userPositionRow = int(raw_input(">> "))
+    print "Enter col"
+    userPositionCol = int(raw_input(">> "))
+    
+    userPositionRow -= 1
+    userPositionCol -= 1
+    
+    board[userPositionRow][userPositionCol] = piece_to_move
+    print_board()
+    
+                
 def select_piece():
     '''
     Lets the user select a piece. Contains the
     menu that the user is presented with. 
     '''
-    piece = ""
-    userInput = ""
-    print "Please select your piece"
-    userInput = raw_input(">> ")
-    if userInput == "K":
-        piece = "WK"
-        move_piece("K")
+    while True:
+        try:
+            print "Enter the row of where your piece is"
+            userPositionRow = int(raw_input(">> "))
+            print "Enter the column of where your piece is"
+            userPositionCol = int(raw_input(">> "))
+            
+            userPositionRow -= 1
+            userPositionCol -= 1
+            
+            if userPositionRow < 0 or userPositionRow > 7 or userPositionCol < 0 or userPositionCol > 7:
+                print "Error, your number is to big or small. Try again"
+                continue
+            else:
+                piece = board[userPositionRow][userPositionCol]
+                if piece == "ES":
+                    print "Ooops, thats an empty space! Try again"
+                    continue
+                else:
+                    board[userPositionRow][userPositionCol] = "ES"
+                    break
+        except ValueError:
+            print "Oops, something went wrong...try again!"
+            
+    
+    print "You selected the %s at %s:%s" % (piece, userPositionRow, userPositionCol)
+    move_piece(piece)
+                
         
 def main():
-    init_board()
-    print_board()
+    print "Welcome to the pre-alpha version of chess!"
+    print "The game will ask you to select a piece."
+    print "Simply enter the INTEGER co-ordinates of where you would like to move the piece"
+    print "The top left corner is 1,1 and the bottom right corner is 8,8"
+    print "Have fun testing this pre-alpha version of chess!"
     select_piece()
                 
 if __name__ == "__main__":
