@@ -4,6 +4,7 @@
 import rules
 
 board = []
+exitGame = False
 
 #white pieces below
 whiteRook = "WR"
@@ -148,7 +149,8 @@ def main():
     print "Simply enter the INTEGER co-ordinates of where you would like to move the piece"
     print "The top left corner is 1,1 and the bottom right corner is 8,8"
     print "Have fun testing this pre-alpha version of chess!"
-    select_piece()
+    while exitGame != True:
+        select_piece()
                 
 if __name__ == "__main__":
     main()
